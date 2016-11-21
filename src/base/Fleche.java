@@ -9,6 +9,8 @@ public class Fleche implements DiagrammeElement {
 	@Override
 	public void accept(DiagrammeElementVisitor visitor) {
 		// TODO Auto-generated method stub
+		this.base.accept(visitor);
+		this.pointe.accept(visitor);
 		visitor.visit(this);
 	}
 }
