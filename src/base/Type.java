@@ -10,7 +10,6 @@ public class Type implements DiagrammeElement {
 	public String nom;
 	public List<Methode> methodes = new ArrayList<Methode>();
 	public List<Variable> variables = new ArrayList<Variable>();
-
 	
 	public void setNom(String nom){
 		this.nom = nom;
