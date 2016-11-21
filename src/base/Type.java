@@ -26,6 +26,14 @@ public class Type implements DiagrammeElement {
 	@Override
 	public void accept(DiagrammeElementVisitor visitor) {
 		// TODO Auto-generated method stub
+		for (Methode methode : this.methodes) {
+			methode.accept(visitor);
+		}
+
+		for (Variable var : this.variables) {
+			var.accept(visitor);
+		}
+
 		visitor.visit(this);
 	}
 }
