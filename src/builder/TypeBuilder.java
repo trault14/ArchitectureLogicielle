@@ -3,7 +3,9 @@ package builder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TypeBuilder implements Builder {
+import base.Type;
+
+public class TypeBuilder{
 	public DiagrammeBuilder parent;
 	public List<MethodeBuilder> methodes = new ArrayList<MethodeBuilder>();
 	public List<VariableBuilder> variables = new ArrayList<VariableBuilder>();
@@ -12,40 +14,52 @@ public class TypeBuilder implements Builder {
 	public TypeBuilder(DiagrammeBuilder parent){
 		this.parent = parent;
 	}
+	
+	public void setNom(String nom){
+		this.nom = nom;
+	}
 
-	@Override
+	
 	public DiagrammeBuilder diagramme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.diagramme();
 	}
 
-	@Override
+	
 	public FlecheBuilder fleche() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.fleche();
 	}
 
-	@Override
-	public TypeBuilder type() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public TypeBuilder type(String nom) {
+		return this.parent.type(nom);
 	}
 
-	@Override
-	public MethodeBuilder methode() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public MethodeBuilder methode(String nom) {
+		MethodeBuilder child = new MethodeBuilder(this);
+		child.setNom(nom);
+		this.methodes.add(child);
+		return child;
 	}
 
-	@Override
-	public VariableBuilder variable() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public VariableBuilder variable(String nom) {
+		VariableBuilder child = new VariableBuilder(this);
+		child.setNom(nom);
+		this.variables.add(child);
+		return child;
 	}
 
-	@Override
-	public Builder getContent() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Type getContent(){
+		Type result = new Type();
+		for(MethodeBuilder mb : methodes){
+			result.addMethode(mb.getContent());
+		}
+		for(VariableBuilder vb : variables){
+			result.addVariable(vb.getContent());
+		}
+		result.setNom(nom);
+		return result;
 	}
 }

@@ -1,6 +1,8 @@
 package builder;
 
-public class FlecheBuilder implements Builder {
+import base.Fleche;
+
+public class FlecheBuilder{
 	public DiagrammeBuilder parent;
 	public TypeBuilder base;
 	public TypeBuilder pointe;
@@ -17,39 +19,21 @@ public class FlecheBuilder implements Builder {
 		this.pointe = pointe;
 	}
 
-	@Override
+	
 	public DiagrammeBuilder diagramme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.diagramme();
 	}
-
-	@Override
+	
+	public TypeBuilder type(String nom) {
+		return this.parent.type(nom);
+	}
+	
 	public FlecheBuilder fleche() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.fleche();
 	}
 
-	@Override
-	public TypeBuilder type() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MethodeBuilder methode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public VariableBuilder variable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Builder getContent() {
-		// TODO Auto-generated method stub
-		return null;
+	public Fleche getContent() {
+		Fleche result = new Fleche();
+		return result; //TODO probleme pour avoir les bases.
 	}
 }

@@ -3,47 +3,50 @@ package builder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodeBuilder implements Builder{
+import base.Methode;
+
+public class MethodeBuilder{
 	public TypeBuilder parent;
 	public List<String> arguments = new ArrayList<String>();
+	String nom;
 	
 	public MethodeBuilder(TypeBuilder parent){
 		this.parent = parent;
 	}
+	
+	public void setNom(String nom){
+		this.nom = nom;
+	}
 
-	@Override
+	
 	public DiagrammeBuilder diagramme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.diagramme();
 	}
 
-	@Override
+	
 	public FlecheBuilder fleche() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.fleche();
 	}
 
-	@Override
-	public TypeBuilder type() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public TypeBuilder type(String nom) {
+		return this.parent.type(nom);
 	}
 
-	@Override
-	public MethodeBuilder methode() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public MethodeBuilder methode(String nom) {
+		return this.parent.methode(nom);
 	}
 
-	@Override
-	public VariableBuilder variable() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public VariableBuilder variable(String nom) {
+		return this.parent.variable(nom);
 	}
 
-	@Override
-	public Builder getContent() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Methode getContent() {
+		Methode result = new Methode();
+		result.setNom(nom);
+		return result;
 	}
 }

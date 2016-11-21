@@ -1,6 +1,8 @@
 package builder;
 
-public class VariableBuilder implements Builder {
+import base.Variable;
+
+public class VariableBuilder{
 	public TypeBuilder parent;
 	public String nom;
 	
@@ -12,39 +14,35 @@ public class VariableBuilder implements Builder {
 		this.nom = nom;
 	}
 
-	@Override
+	
 	public DiagrammeBuilder diagramme() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.parent.diagramme();
 	}
 
-	@Override
+	
 	public FlecheBuilder fleche() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.parent.fleche();
 	}
 
-	@Override
-	public TypeBuilder type() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public TypeBuilder type(String nom) {
+		return this.parent.type(nom);
 	}
 
-	@Override
-	public MethodeBuilder methode() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public MethodeBuilder methode(String nom) {
+		return this.parent.methode(nom);
 	}
 
-	@Override
-	public VariableBuilder variable() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public VariableBuilder variable(String nom) {
+		return this.parent.variable(nom);
 	}
 
-	@Override
-	public Builder getContent() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Variable getContent() {
+		Variable result = new Variable();
+		result.setNom(nom);
+		return result;
 	}
 }
