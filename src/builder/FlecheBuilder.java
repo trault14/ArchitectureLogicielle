@@ -16,4 +16,40 @@ public class FlecheBuilder implements Builder {
 	public void setPointe(TypeBuilder pointe){
 		this.pointe = pointe;
 	}
+
+	@Override
+	public DiagrammeBuilder diagramme() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FlecheBuilder fleche() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TypeBuilder type() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MethodeBuilder methode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public VariableBuilder variable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Builder getContent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
