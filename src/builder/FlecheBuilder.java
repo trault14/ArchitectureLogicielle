@@ -4,18 +4,18 @@ import base.Fleche;
 
 public class FlecheBuilder{
 	public DiagrammeBuilder parent;
-	public TypeBuilder base;
-	public TypeBuilder pointe;
+	public String base;
+	public String pointe;
 	
 	public FlecheBuilder(DiagrammeBuilder parent){
 		this.parent = parent;
 	}
 	
-	public void setBase(TypeBuilder base){
+	public void setBase(String base){
 		this.base = base;
 	}
 	
-	public void setPointe(TypeBuilder pointe){
+	public void setPointe(String pointe){
 		this.pointe = pointe;
 	}
 
@@ -28,12 +28,14 @@ public class FlecheBuilder{
 		return this.parent.type(nom);
 	}
 	
-	public FlecheBuilder fleche() {
-		return this.parent.fleche();
+	public FlecheBuilder fleche(String nomBase, String nomPointe) {
+		return this.parent.fleche(nomBase, nomPointe);
 	}
 
 	public Fleche getContent() {
 		Fleche result = new Fleche();
+		result.setBase(this.base);
+		result.setPointe(this.pointe);
 		return result; //TODO probleme pour avoir les bases.
 	}
 }

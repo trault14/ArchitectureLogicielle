@@ -25,14 +25,17 @@ public class DiagrammeBuilder{
 		return child;
 	}
 	
-	public FlecheBuilder fleche() {
+	public FlecheBuilder fleche(String nomBase, String nomPointe) {
 		FlecheBuilder child = new FlecheBuilder(this);
+		child.setBase(nomBase);
+		child.setPointe(nomPointe);
 		this.fleches.add(child);
 		return child;
 	}
 	
 	public TypeBuilder type(String nom) {
 		TypeBuilder child = new TypeBuilder(this);
+		child.setNom(nom);
 		this.types.add(child);
 		return child;
 	}
@@ -45,7 +48,7 @@ public class DiagrammeBuilder{
 		for(TypeBuilder tb : this.types){
 			result.addType(tb.getContent());
 		}
-		for(FlecheBuilder fb : this.fleches){
+		for(FlecheBuilder fb : this.fleches){ //Il faut obligatoirement avoir ajouté les types avant, pour que les fleches puissent bien se construire
 			result.addFleche(fb.getContent());
 		}
 		return result;

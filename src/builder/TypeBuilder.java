@@ -25,8 +25,8 @@ public class TypeBuilder{
 	}
 
 	
-	public FlecheBuilder fleche() {
-		return this.parent.fleche();
+	public FlecheBuilder fleche(String nomBase, String nomPointe) {
+		return this.parent.fleche(nomBase, nomPointe);
 	}
 
 	

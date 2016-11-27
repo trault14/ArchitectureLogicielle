@@ -13,7 +13,9 @@ public class Main {
 				.type("classe2")
 					.methode("methode1")
 					.variable("variable1")
-				.type("interface1");
+				.type("interface1")
+				.fleche("classe1", "classe2")
+		;
 		
 		Diagramme diagramme = diagrammeBuilder.getContent();
 

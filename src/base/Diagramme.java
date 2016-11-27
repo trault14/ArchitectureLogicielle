@@ -16,7 +16,19 @@ public class Diagramme implements DiagrammeElement {
 		this.types.add(type);
 	}
 	
+	public Type getType(String nom){
+		for (Type t : types){
+			if(t.nom.equals(nom)){
+				return t;
+			}
+		}
+		System.err.println("Type "+nom+" non trouvé");
+		return null; //TODO à modifier (exit code ?)
+	}
+	
 	public void addFleche(Fleche fleche){
+		fleche.setBase(this.getType(fleche.nomBase));
+		fleche.setPointe(this.getType(fleche.nomPointe));
 		this.fleches.add(fleche);
 	}
 	
