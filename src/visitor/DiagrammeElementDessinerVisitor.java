@@ -23,8 +23,8 @@ import base.Variable;
 
 public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor{
 	
-	int x = 0;
-	int y = 0;
+	int x = 10;
+	int y = 10;
 	int hauteur = 15;
 	int largeur = 100;
 	int dtexte = 2*hauteur / 3; //decalage du texte en y
