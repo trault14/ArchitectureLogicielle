@@ -1,5 +1,6 @@
 package builder;
 
+import base.Type;
 import base.Variable;
 
 public class VariableBuilder{
@@ -40,8 +41,9 @@ public class VariableBuilder{
 	}
 
 	
-	public Variable getContent() {
+	public Variable getContent(Type parent) {
 		Variable result = new Variable();
+		result.setParent(parent);
 		result.setNom(nom);
 		return result;
 	}

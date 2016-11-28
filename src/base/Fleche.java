@@ -8,6 +8,11 @@ public class Fleche implements DiagrammeElement {
 	public String nomPointe;
 	public Type base;
 	public Type pointe;
+	public Diagramme parent;
+	
+	public void setParent(Diagramme parent){
+		this.parent = parent;
+	}
 	
 	public void setBase(String nomBase){
 		this.nomBase = nomBase;
@@ -27,9 +32,6 @@ public class Fleche implements DiagrammeElement {
 		
 	@Override
 	public void accept(DiagrammeElementVisitor visitor) {
-		// TODO Auto-generated method stub
-		this.base.accept(visitor);
-		this.pointe.accept(visitor);
 		visitor.visit(this);
 	}
 }

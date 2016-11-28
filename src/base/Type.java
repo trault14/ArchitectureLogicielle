@@ -10,6 +10,11 @@ public class Type implements DiagrammeElement {
 	public String nom;
 	public List<Methode> methodes = new ArrayList<Methode>();
 	public List<Variable> variables = new ArrayList<Variable>();
+	public Diagramme parent;
+	
+	public void setParent(Diagramme parent){
+		this.parent = parent;
+	}
 	
 	public void setNom(String nom){
 		this.nom = nom;
@@ -25,15 +30,15 @@ public class Type implements DiagrammeElement {
 
 	@Override
 	public void accept(DiagrammeElementVisitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
+		
+		for (Variable var : this.variables) {
+			var.accept(visitor);
+		}
+		
 		for (Methode methode : this.methodes) {
 			methode.accept(visitor);
 		}
 
-		for (Variable var : this.variables) {
-			var.accept(visitor);
-		}
-
-		visitor.visit(this);
 	}
 }

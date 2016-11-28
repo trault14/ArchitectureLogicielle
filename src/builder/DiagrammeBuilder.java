@@ -40,16 +40,17 @@ public class DiagrammeBuilder{
 		return child;
 	}
 	
-	public Diagramme getContent() {
+	public Diagramme getContent(Diagramme parent) {
 		Diagramme result = new Diagramme();
+		result.setParent(parent);
 		for(DiagrammeBuilder db : this.diagrammes){
-			result.addDiagramme(db.getContent());
+			result.addDiagramme(db.getContent(result));
 		}
 		for(TypeBuilder tb : this.types){
-			result.addType(tb.getContent());
+			result.addType(tb.getContent(result));
 		}
-		for(FlecheBuilder fb : this.fleches){ //Il faut obligatoirement avoir ajouté les types avant, pour que les fleches puissent bien se construire
-			result.addFleche(fb.getContent());
+		for(FlecheBuilder fb : this.fleches){ //Il faut obligatoirement avoir ajoutï¿½ les types avant, pour que les fleches puissent bien se construire
+			result.addFleche(fb.getContent(result));
 		}
 		return result;
 	}

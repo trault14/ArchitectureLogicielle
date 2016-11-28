@@ -10,8 +10,12 @@ public class Diagramme implements DiagrammeElement {
 	public List<Type> types = new ArrayList<Type>();
 	public List<Fleche> fleches = new ArrayList<Fleche>();
 	public List<Diagramme> diagrammes = new ArrayList<Diagramme>();
-
+	public Diagramme parent;
 	
+	public void setParent(Diagramme parent){
+		this.parent = parent;
+	}
+
 	public void addType(Type type){
 		this.types.add(type);
 	}
@@ -22,8 +26,8 @@ public class Diagramme implements DiagrammeElement {
 				return t;
 			}
 		}
-		System.err.println("Type "+nom+" non trouvé");
-		return null; //TODO à modifier (exit code ?)
+		System.err.println("Type "+nom+" non trouvï¿½");
+		return null; //TODO ï¿½ modifier (exit code ?)
 	}
 	
 	public void addFleche(Fleche fleche){

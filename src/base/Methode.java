@@ -10,6 +10,11 @@ public class Methode implements DiagrammeElement  {
 	public List<String> arguments = new ArrayList<String>();
 
 	public String nom;
+	public Type parent;
+	
+	public void setParent(Type parent){
+		this.parent = parent;
+	}
 	
 	public void setNom(String nom){
 		this.nom = nom;

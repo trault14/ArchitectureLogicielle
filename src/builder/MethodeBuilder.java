@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.Methode;
+import base.Type;
 
 public class MethodeBuilder{
 	public TypeBuilder parent;
@@ -44,8 +45,9 @@ public class MethodeBuilder{
 	}
 
 	
-	public Methode getContent() {
+	public Methode getContent(Type parent) {
 		Methode result = new Methode();
+		result.setParent(parent);
 		result.setNom(nom);
 		return result;
 	}

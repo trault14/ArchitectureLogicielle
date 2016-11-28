@@ -1,5 +1,6 @@
 package builder;
 
+import base.Diagramme;
 import base.Fleche;
 
 public class FlecheBuilder{
@@ -32,8 +33,9 @@ public class FlecheBuilder{
 		return this.parent.fleche(nomBase, nomPointe);
 	}
 
-	public Fleche getContent() {
+	public Fleche getContent(Diagramme parent) {
 		Fleche result = new Fleche();
+		result.setParent(parent);
 		result.setBase(this.base);
 		result.setPointe(this.pointe);
 		return result; //TODO probleme pour avoir les bases.

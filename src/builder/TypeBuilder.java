@@ -3,6 +3,7 @@ package builder;
 import java.util.ArrayList;
 import java.util.List;
 
+import base.Diagramme;
 import base.Type;
 
 public class TypeBuilder{
@@ -51,13 +52,14 @@ public class TypeBuilder{
 	}
 
 	
-	public Type getContent(){
+	public Type getContent(Diagramme parent){
 		Type result = new Type();
+		result.setParent(parent);
 		for(MethodeBuilder mb : methodes){
-			result.addMethode(mb.getContent());
+			result.addMethode(mb.getContent(result));
 		}
 		for(VariableBuilder vb : variables){
-			result.addVariable(vb.getContent());
+			result.addVariable(vb.getContent(result));
 		}
 		result.setNom(nom);
 		return result;
