@@ -12,6 +12,10 @@ public class Diagramme implements DiagrammeElement {
 	public List<Diagramme> diagrammes = new ArrayList<Diagramme>();
 	public Diagramme parent;
 	
+	public List<Type> getTypes(){
+		return this.types;
+	}
+	
 	public void setParent(Diagramme parent){
 		this.parent = parent;
 	}

@@ -50,7 +50,7 @@
       ><line x1="10" x2="110" y1="280" style="fill:none; stroke:black;" y2="280"
       /><text x="10" xml:space="preserve" y="290" style="fill:black; stroke:none;"
       >m : methode1</text
-      ><line x1="10" x2="25" y1="310" style="fill:none; stroke:black;" y2="325"
+      ><line x1="60" x2="60" y1="130" style="fill:none; stroke:red;" y2="145"
     /></g
   ></g
 ></svg
