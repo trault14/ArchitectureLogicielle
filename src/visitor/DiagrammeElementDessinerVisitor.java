@@ -1,7 +1,10 @@
 package visitor;
 
 import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -12,6 +15,7 @@ import java.io.Writer;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.svggen.SVGGraphics2DIOException;
+//import org.apache.batik.svggen.font.Font;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
@@ -68,7 +72,11 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		// System.out.println("Visite du Type");
 		int nbVariables = type.variables.size();
 		int nbMethodes = type.methodes.size();
-		svgGenerator.setPaint(Color.yellow);
+		
+		//Couleur du fond du type 
+		svgGenerator.setPaint(Color.white);
+		
+		//Création du rectangle du type
 		svgGenerator.fill(new Rectangle(x, y, largeur, (nbVariables
 				+ nbMethodes + 1)
 				* hauteur));
@@ -76,8 +84,13 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		svgGenerator.draw(new Rectangle(x, y, largeur, (nbVariables
 				+ nbMethodes + 1)
 				* hauteur));
+		
+		//Ecriture du nom du type
 		svgGenerator.drawString(type.nom, x, y + dtexte);
+		
+		//Ligne de séparation
 		svgGenerator.drawLine(x, y + hauteur, x + largeur, y + hauteur);
+		
 		this.y += hauteur;
 		if (type.methodes.isEmpty() && type.variables.isEmpty()) {
 			this.y += hauteur; // on saute une ligne
@@ -99,10 +112,13 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int indexBase = base.parent.getTypes().indexOf(base);
 		int indexPointe = pointe.parent.getTypes().indexOf(pointe);
 
+		// Décalage de la ligne par rapport au Type
+		int e = (int) (Math.random() * 7) + 3;
+		System.out.println(e);
+
 		// Coordonnées de départ de la ligne
-		int xBase = xDepart + largeur /2;
+		int xBase = xDepart - e;
 		int yBase = yDepart;
-		System.out.println(xBase + ", " + yBase);
 
 		for (int i = 0; i <= indexBase; i++) {
 			// nom
@@ -117,9 +133,8 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		}
 
 		// Coordonnées d'arrivée de la ligne
-		int xPointe = xDepart + largeur /2;
+		int xPointe = xDepart - e;
 		int yPointe = yDepart + (indexPointe * hauteur);
-		System.out.println(xPointe + ", " + yPointe);
 
 		for (int j = 0; j < indexPointe; j++) {
 			// nom
@@ -135,9 +150,28 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 					* hauteur;
 		}
 
-		// Tracé de la ligne
-		svgGenerator.setPaint(Color.red);
+		// Tracé des lignes
+
+		// Ligne principale
+		svgGenerator.setPaint(Color.black);
 		svgGenerator.drawLine(xBase, yBase, xPointe, yPointe);
+
+		// lignes secondaires reliant la ligne principale avec les classes
+		svgGenerator.drawLine(xBase, yBase, xBase + e, yBase);
+		svgGenerator.drawLine(xPointe, yPointe, xPointe + e, yPointe);
+
+		// Triangle de la fleche
+		int[] xTriangle = new int[3];
+		xTriangle[0] = xPointe + e;
+		xTriangle[1] = xPointe + e - 2;
+		xTriangle[2] = xPointe + e - 2;
+
+		int[] yTriangle = new int[3];
+		yTriangle[0] = yPointe;
+		yTriangle[1] = yPointe + 2;
+		yTriangle[2] = yPointe - 2;
+		svgGenerator.drawPolygon(new Polygon(xTriangle, yTriangle, 3));
+		svgGenerator.fillPolygon(new Polygon(xTriangle, yTriangle, 3));
 	}
 
 	@Override
