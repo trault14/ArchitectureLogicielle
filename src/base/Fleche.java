@@ -10,6 +10,14 @@ public class Fleche implements DiagrammeElement {
 	public Type pointe;
 	public Diagramme parent;
 	
+	public Type getBase(){
+		return this.base;
+	}
+	
+	public Type getPointe(){
+		return this.pointe;
+	}
+	
 	public void setParent(Diagramme parent){
 		this.parent = parent;
 	}

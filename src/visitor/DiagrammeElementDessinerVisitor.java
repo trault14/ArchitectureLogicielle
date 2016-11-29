@@ -80,6 +80,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor{
 	@Override
 	public void visit(Fleche fleche) {
 		System.out.println("Visite de Fleche");
+		
 	}
 
 	@Override
