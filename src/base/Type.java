@@ -12,6 +12,10 @@ public class Type implements DiagrammeElement {
 	public List<Variable> variables = new ArrayList<Variable>();
 	public Diagramme parent;
 	
+	public Diagramme getParent(){
+		return this.parent;
+	} 
+	
 	public void setParent(Diagramme parent){
 		this.parent = parent;
 	}
