@@ -29,7 +29,8 @@ public class Main {
 					.methode("methode1")
 				.fleche("classe1", "classe2")
 				.fleche("classe1", "interface1")
-				.fleche("interface1", "classe1");
+				.fleche("interface1", "classe2")
+		;
 
 		Diagramme diagramme = diagrammeBuilder.getContent(null);
 

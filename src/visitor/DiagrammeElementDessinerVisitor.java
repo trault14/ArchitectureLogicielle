@@ -113,8 +113,6 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	@Override
 	public void visit(Fleche fleche) {
 		System.out.println("Visite de Fleche");
-		// int xDepart = 10;
-		// int yDepart = 10;
 
 		// Recuperation des classes reliées par la fleche
 		Type base = fleche.getBase();
@@ -126,12 +124,8 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int indexPointe = pointe.parent.getTypes().indexOf(pointe);
 
 		// Décalage de la ligne par rapport au Type
-		int e = (int) (Math.random() * 7) + 3;
+		int e = (int) (Math.random() * 10) + 3;
 		// System.out.println(e);
-
-		// Coordonnées de départ de la ligne
-		// int xBase = xDepart - e;
-		// int yBase = yDepart;
 
 		// Recupération des coordonnées du type de départ
 		int xBase = this.typeDessin.get(indexBase).getX();
@@ -142,47 +136,77 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int yPointe = this.typeDessin.get(indexPointe).getY()
 				+ this.typeDessin.get(indexPointe).getHeight();
 
-		/*
-		 * for (int i = 0; i <= indexBase; i++) { // nom yBase += hauteur;
-		 * 
-		 * // Variables yBase += base.parent.getTypes().get(i).variables.size()
-		 * * hauteur;
-		 * 
-		 * // Methodes // Variables yBase +=
-		 * base.parent.getTypes().get(i).methodes.size() * hauteur; }
-		 * 
-		 * // Coordonnées d'arrivée de la ligne int xPointe = xDepart - e; int
-		 * yPointe = yDepart + (indexPointe * hauteur);
-		 * 
-		 * for (int j = 0; j < indexPointe; j++) { // nom yPointe += hauteur;
-		 * 
-		 * // Variables yPointe +=
-		 * pointe.parent.getTypes().get(j).variables.size() hauteur;
-		 * 
-		 * // Methodes // Variables yPointe +=
-		 * pointe.parent.getTypes().get(j).methodes.size() hauteur; }
-		 */
-
 		// Tracé des lignes
 
 		// Ligne principale
 		svgGenerator.setPaint(Color.black);
-		svgGenerator.drawLine(xBase - e, yBase, xBase - e, yPointe);
 
-		// lignes secondaires reliant la ligne principale avec les classes
-		svgGenerator.drawLine(xBase - e, yBase, xBase, yBase);
-		svgGenerator.drawLine(xBase - e, yPointe, xPointe, yPointe);
-
-		// Triangle de la fleche
 		int[] xTriangle = new int[3];
-		xTriangle[0] = xPointe;
-		xTriangle[1] = xPointe - 2;
-		xTriangle[2] = xPointe - 2;
-
 		int[] yTriangle = new int[3];
-		yTriangle[0] = yPointe;
-		yTriangle[1] = yPointe + 2;
-		yTriangle[2] = yPointe - 2;
+
+		yTriangle[0] = yPointe + e;
+		yTriangle[1] = yPointe + 2 + e;
+		yTriangle[2] = yPointe - 2 + e;
+		// Fleche à gauche
+		int difference = xPointe - xBase;
+		if (difference < this.typeDessin.get(indexBase).getWidth() / 2) {
+			int x0;
+			int x1;
+			int y0;
+			int y1;
+			if(xBase>xPointe){
+				x0 = xPointe;
+				x1 = xBase;
+				
+				y0 = yPointe;
+				y1 = yBase;
+			}else{
+				x0 = xBase;
+				x1 = xPointe;
+				
+				y0 = yBase;
+				y1 = yPointe;
+			}
+			svgGenerator.drawLine(x0 - e, yBase + e, x0 - e, yPointe + e);
+
+			// lignes secondaires reliant la ligne principale avec les classes
+			svgGenerator.drawLine(x0 - e, y0 + e, x0, y0 + e);
+			
+			svgGenerator.drawLine(x0 - e, y1 + e, x1, y1 + e);
+
+			// Triangle de la fleche
+			xTriangle[0] = xPointe;
+			xTriangle[1] = xPointe - 2;
+			xTriangle[2] = xPointe - 2;
+
+		} else {
+			// Fleche à droite
+			svgGenerator.drawLine(xPointe
+					+ this.typeDessin.get(indexPointe).getWidth() + e, yBase
+					+ e, xPointe + this.typeDessin.get(indexPointe).getWidth()
+					+ e, yPointe + e);
+
+			// lignes secondaires reliant la ligne principale avec les classes
+			// Ligne partant de la classe de base
+			svgGenerator.drawLine(xBase
+					+ this.typeDessin.get(indexBase).getWidth(), yBase + e,
+					xPointe + this.typeDessin.get(indexPointe).getWidth() + e,
+					yBase + e);
+			// Ligne arrivant à la pointe
+			svgGenerator.drawLine(xPointe
+					+ this.typeDessin.get(indexPointe).getWidth(), yPointe
+					+ e, xPointe + this.typeDessin.get(indexPointe).getWidth()
+					+ e, yPointe + e);
+
+			// Triangle de la fleche
+			xTriangle[0] = xPointe
+					+ this.typeDessin.get(indexPointe).getWidth() ;
+			xTriangle[1] = xPointe
+					+ this.typeDessin.get(indexPointe).getWidth() + 2;
+			xTriangle[2] = xPointe
+					+ this.typeDessin.get(indexPointe).getWidth() + 2;
+		}
+
 		svgGenerator.drawPolygon(new Polygon(xTriangle, yTriangle, 3));
 		svgGenerator.fillPolygon(new Polygon(xTriangle, yTriangle, 3));
 	}
