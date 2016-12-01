@@ -6,21 +6,45 @@ import java.util.List;
 import visitor.DiagrammeElement;
 import visitor.DiagrammeElementVisitor;
 
-public class Methode implements DiagrammeElement  {
-	public List<String> arguments = new ArrayList<String>();
+public class Methode implements DiagrammeElement {
 
-	public String nom;
-	public Type parent;
+	// Arguments de la méthode
+	public List<String> arguments = new ArrayList<String>();
 	
-	public void setParent(Type parent){
+	// Sortie
+	public String sortie;
+
+	// Nom de la méthode
+	public String nom;
+
+	// Type dont la méthode appartient
+	public Type parent;
+
+	// public (statut = true) ou private (statut = false)
+	public boolean statut;
+	
+	public boolean getStatut(){
+		return this.statut;
+	}
+	
+	public String getSortie(){
+		return this.sortie;
+	}
+
+	//Changer le statut (public ou private) de la méthode
+	public void setStatut() {
+		statut = !statut;
+	}
+
+	public void setParent(Type parent) {
 		this.parent = parent;
 	}
-	
-	public void setNom(String nom){
+
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	public void addArgument(String argument){
+
+	public void addArgument(String argument) {
 		this.arguments.add(argument);
 	}
 

@@ -33,7 +33,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	int x = 30;
 	int y = 10;
 	int hauteur = 15;
-	int largeur = 100;
+	int largeur = 150;
 	int dtexte = 2 * hauteur / 3; // decalage du texte en y
 
 	SVGGraphics2D svgGenerator = this.getGenerator();
@@ -154,16 +154,16 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 			int x1;
 			int y0;
 			int y1;
-			if(xBase>xPointe){
+			if (xBase > xPointe) {
 				x0 = xPointe;
 				x1 = xBase;
-				
+
 				y0 = yPointe;
 				y1 = yBase;
-			}else{
+			} else {
 				x0 = xBase;
 				x1 = xPointe;
-				
+
 				y0 = yBase;
 				y1 = yPointe;
 			}
@@ -171,7 +171,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 			// lignes secondaires reliant la ligne principale avec les classes
 			svgGenerator.drawLine(x0 - e, y0 + e, x0, y0 + e);
-			
+
 			svgGenerator.drawLine(x0 - e, y1 + e, x1, y1 + e);
 
 			// Triangle de la fleche
@@ -194,13 +194,13 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 					yBase + e);
 			// Ligne arrivant à la pointe
 			svgGenerator.drawLine(xPointe
-					+ this.typeDessin.get(indexPointe).getWidth(), yPointe
-					+ e, xPointe + this.typeDessin.get(indexPointe).getWidth()
-					+ e, yPointe + e);
+					+ this.typeDessin.get(indexPointe).getWidth(), yPointe + e,
+					xPointe + this.typeDessin.get(indexPointe).getWidth() + e,
+					yPointe + e);
 
 			// Triangle de la fleche
 			xTriangle[0] = xPointe
-					+ this.typeDessin.get(indexPointe).getWidth() ;
+					+ this.typeDessin.get(indexPointe).getWidth();
 			xTriangle[1] = xPointe
 					+ this.typeDessin.get(indexPointe).getWidth() + 2;
 			xTriangle[2] = xPointe
@@ -215,7 +215,18 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	public void visit(Methode methode) {
 		System.out.println("Visite de Methode");
 		// svgGenerator.draw(new Rectangle(x, y, largeur, hauteur));
-		svgGenerator.drawString("m : " + methode.nom, x, y + dtexte);
+
+		// On vérifie si la méthode est public ou private
+		if (methode.getStatut()) { // public
+			svgGenerator.drawString("+ " + methode.nom + "("
+					+ methode.arguments.toString() + ") : " + methode.sortie,
+					x, y + dtexte);
+		} else {
+			svgGenerator.drawString("+ " + methode.nom + "("
+					+ methode.arguments.toString() + ") : " + methode.sortie,
+					x, y + dtexte);
+		}
+
 		this.y += hauteur; // Passage à la ligne suivante
 		if (methode.equals(methode.parent.methodes.get(methode.parent.methodes
 				.size() - 1))) {
@@ -230,12 +241,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	@Override
 	public void visit(Variable var) {
 		System.out.println("Visite de Variable");
-		// svgGenerator.draw(new Rectangle(x, y, largeur, hauteur));
-
-		// Recuperation des coordonnees du type
-		// int xVar =
-		// this.typeDessin.get(var.parent.getParent().getTypes().indexOf(var.parent)).getX();
-		svgGenerator.drawString("v : " + var.nom, x, y + dtexte);
+		svgGenerator.drawString("+ " + var.nom, x, y + dtexte);
 		this.y += hauteur; // Passage à la ligne suivante
 		if (var.equals(var.parent.variables.get(var.parent.variables.size() - 1))) {
 			svgGenerator.drawLine(x, y, x + largeur, y);

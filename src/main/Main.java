@@ -30,6 +30,7 @@ public class Main {
 				.fleche("classe1", "classe2")
 				.fleche("classe1", "interface1")
 				.fleche("interface1", "classe2")
+				.fleche("interface1", "classe1")
 		;
 
 		Diagramme diagramme = diagrammeBuilder.getContent(null);
