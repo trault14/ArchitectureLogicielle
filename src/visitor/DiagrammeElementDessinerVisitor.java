@@ -241,7 +241,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	@Override
 	public void visit(Variable var) {
 		System.out.println("Visite de Variable");
-		svgGenerator.drawString("+ " + var.nom, x, y + dtexte);
+		svgGenerator.drawString("+ " + var.nom + " : " + var.typeVariable, x, y + dtexte);
 		this.y += hauteur; // Passage à la ligne suivante
 		if (var.equals(var.parent.variables.get(var.parent.variables.size() - 1))) {
 			svgGenerator.drawLine(x, y, x + largeur, y);

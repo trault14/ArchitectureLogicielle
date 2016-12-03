@@ -4,6 +4,7 @@ import visitor.DiagrammeElement;
 import visitor.DiagrammeElementVisitor;
 
 public class Variable implements DiagrammeElement  {
+	public String typeVariable;
 	public String nom;
 	public Type parent;
 	
