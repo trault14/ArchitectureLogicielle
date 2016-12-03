@@ -36,9 +36,11 @@ public class TypeBuilder{
 	}
 
 	
-	public MethodeBuilder methode(String nom) {
+	public MethodeBuilder methode(String visibility, String nom, String returnType) {
 		MethodeBuilder child = new MethodeBuilder(this);
+        child.setVisibility(visibility);
 		child.setNom(nom);
+        child.setReturnType(returnType);
 		this.methodes.add(child);
 		return child;
 	}

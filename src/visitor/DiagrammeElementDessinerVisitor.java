@@ -219,11 +219,11 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		// On vérifie si la méthode est public ou private
 		if (methode.getStatut()) { // public
 			svgGenerator.drawString(" " + "+ " + methode.nom + "("
-					+ methode.arguments.toString() + ") : " + methode.sortie,
+					+ methode.arguments.toString() + ") : " + methode.returnType,
 					x, y + dtexte);
 		} else {
 			svgGenerator.drawString(" " + "+ " + methode.nom + "("
-					+ methode.arguments.toString() + ") : " + methode.sortie,
+					+ methode.arguments.toString() + ") : " + methode.returnType,
 					x, y + dtexte);
 		}
 

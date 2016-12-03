@@ -41,8 +41,8 @@ public class VariableBuilder{
 	}
 
 	
-	public MethodeBuilder methode(String nom) {
-		return this.parent.methode(nom);
+	public MethodeBuilder methode(String visibility, String nom, String returnType) {
+		return this.parent.methode(visibility, nom, returnType);
 	}
 
 	

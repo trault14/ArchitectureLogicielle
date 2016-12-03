@@ -9,7 +9,9 @@ import base.Type;
 public class MethodeBuilder{
 	public TypeBuilder parent;
 	public List<String> arguments = new ArrayList<String>();
+	String visibility;
 	String nom;
+	String returnType;
 	
 	public MethodeBuilder(TypeBuilder parent){
 		this.parent = parent;
@@ -19,8 +21,15 @@ public class MethodeBuilder{
 		this.nom = nom;
 	}
 
-	
-	public DiagrammeBuilder diagramme() {
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public void setReturnType(String returnType) {
+        this.returnType = returnType;
+    }
+
+    public DiagrammeBuilder diagramme() {
 		return this.parent.diagramme();
 	}
 
@@ -35,8 +44,8 @@ public class MethodeBuilder{
 	}
 
 	
-	public MethodeBuilder methode(String nom) {
-		return this.parent.methode(nom);
+	public MethodeBuilder methode(String visibility, String nom, String returnType) {
+		return this.parent.methode(visibility, nom, returnType);
 	}
 
 	
@@ -48,7 +57,9 @@ public class MethodeBuilder{
 	public Methode getContent(Type parent) {
 		Methode result = new Methode();
 		result.setParent(parent);
+        result.setVisibility(visibility);
 		result.setNom(nom);
+        result.setReturnType(returnType);
 		return result;
 	}
 }

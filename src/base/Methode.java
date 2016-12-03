@@ -10,12 +10,15 @@ public class Methode implements DiagrammeElement {
 
 	// Arguments de la méthode
 	public List<String> arguments = new ArrayList<String>();
-	
-	// Sortie
-	public String sortie;
+
+	// Visibilité public ou private de la methode
+	public String visibility;
 
 	// Nom de la méthode
 	public String nom;
+
+	// Type de retour de la methode
+    public String returnType;
 
 	// Type dont la méthode appartient
 	public Type parent;
@@ -27,8 +30,8 @@ public class Methode implements DiagrammeElement {
 		return this.statut;
 	}
 	
-	public String getSortie(){
-		return this.sortie;
+	public String getReturnType(){
+		return this.returnType;
 	}
 
 	//Changer le statut (public ou private) de la méthode
@@ -44,7 +47,15 @@ public class Methode implements DiagrammeElement {
 		this.nom = nom;
 	}
 
-	public void addArgument(String argument) {
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public void setReturnType(String returnType) {
+        this.returnType = returnType;
+    }
+
+    public void addArgument(String argument) {
 		this.arguments.add(argument);
 	}
 
