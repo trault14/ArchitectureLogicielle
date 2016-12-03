@@ -12,13 +12,11 @@ public class VariableDessin implements ElementDessin {
 
 	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
 		return this.x;
 	}
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
 		return this.y;
 	}
 

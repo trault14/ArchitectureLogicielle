@@ -5,15 +5,25 @@ import base.Variable;
 
 public class VariableBuilder{
 	public TypeBuilder parent;
+    public String visibility;
 	public String nom;
+    public String type;
 	
 	public VariableBuilder(TypeBuilder parent){
 		this.parent = parent;
 	}
+
+	public void setVisibility(String visibility) {
+	    this.visibility = visibility;
+    }
 	
 	public void setNom(String nom){
 		this.nom = nom;
 	}
+
+	public void setType(String type) {
+	    this.type = type;
+    }
 
 	
 	public DiagrammeBuilder diagramme() {
@@ -36,15 +46,17 @@ public class VariableBuilder{
 	}
 
 	
-	public VariableBuilder variable(String nom) {
-		return this.parent.variable(nom);
+	public VariableBuilder variable(String visibility, String nom, String type) {
+		return this.parent.variable(visibility, nom, type);
 	}
 
 	
 	public Variable getContent(Type parent) {
 		Variable result = new Variable();
 		result.setParent(parent);
+        result.setVisibility(visibility);
 		result.setNom(nom);
+        result.setTypeVariable(type);
 		return result;
 	}
 }

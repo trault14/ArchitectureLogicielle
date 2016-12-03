@@ -44,9 +44,11 @@ public class TypeBuilder{
 	}
 
 	
-	public VariableBuilder variable(String nom) {
+	public VariableBuilder variable(String visibility, String nom, String type) {
 		VariableBuilder child = new VariableBuilder(this);
+        child.setVisibility(visibility);
 		child.setNom(nom);
+		child.setType(type);
 		this.variables.add(child);
 		return child;
 	}

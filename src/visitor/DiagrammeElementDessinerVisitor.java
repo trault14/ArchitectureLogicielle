@@ -94,7 +94,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 				* hauteur));
 
 		// Ecriture du nom du type
-		svgGenerator.drawString(type.nom, x, y + dtexte);
+		svgGenerator.drawString(" " + type.nom, x, y + dtexte);
 
 		// Ligne de séparation
 		svgGenerator.drawLine(x, y + hauteur, x + largeur, y + hauteur);
@@ -218,11 +218,11 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		// On vérifie si la méthode est public ou private
 		if (methode.getStatut()) { // public
-			svgGenerator.drawString("+ " + methode.nom + "("
+			svgGenerator.drawString(" " + "+ " + methode.nom + "("
 					+ methode.arguments.toString() + ") : " + methode.sortie,
 					x, y + dtexte);
 		} else {
-			svgGenerator.drawString("+ " + methode.nom + "("
+			svgGenerator.drawString(" " + "+ " + methode.nom + "("
 					+ methode.arguments.toString() + ") : " + methode.sortie,
 					x, y + dtexte);
 		}
@@ -241,7 +241,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	@Override
 	public void visit(Variable var) {
 		System.out.println("Visite de Variable");
-		svgGenerator.drawString("+ " + var.nom + " : " + var.typeVariable, x, y + dtexte);
+		svgGenerator.drawString(" " + var.visibility + " " + var.nom + " : " + var.typeVariable, x, y + dtexte);
 		this.y += hauteur; // Passage à la ligne suivante
 		if (var.equals(var.parent.variables.get(var.parent.variables.size() - 1))) {
 			svgGenerator.drawLine(x, y, x + largeur, y);
