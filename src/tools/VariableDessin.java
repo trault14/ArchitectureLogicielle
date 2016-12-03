@@ -3,7 +3,6 @@ package tools;
 public class VariableDessin implements ElementDessin {
 
 	private int x;
-	
 	private int y;
 
 	public VariableDessin(int x, int y) {

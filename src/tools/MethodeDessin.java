@@ -2,8 +2,7 @@ package tools;
 
 public class MethodeDessin implements ElementDessin {
 
-	private int x;
-	
+	private int x;	
 	private int y;
 
 	public MethodeDessin(int x, int y) {
