@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -55,7 +56,16 @@ public class Lister {
 				for(Field var : vars){
 					type.variable("+", var.getName(), var.getGenericType().getTypeName()); //TODO details
 				}
-				//TODO fleches
+				
+				Type[] interfaces = c.getGenericInterfaces();
+				for(Type interf : interfaces){
+					diagramme.fleche(className, interf.getTypeName()); //TODO ajouter quand on aura la differenciation class/interface
+				}
+				Type superclass = c.getGenericSuperclass();
+				if(superclass!=null && superclass.getTypeName()!="java.lang.Object"){
+					diagramme.fleche(className, superclass.getTypeName()); //TODO ajouter quand on aura la differenciation class/interface
+				}
+				
 			} catch (ClassNotFoundException e) {
 				System.err.println("Class not found : "+className);
 				e.printStackTrace();
