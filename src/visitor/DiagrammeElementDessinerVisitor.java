@@ -242,9 +242,9 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 								// dernière
 			// prochain type placé de manière aléatoire sur le diagramme
 			int nouveauX = this.x + (int) (Math.random() * 300)
-					- (int) (Math.random() * 200);
-			int nouveauY = this.y + (int) (Math.random() * 100)
-					- (int) (Math.random() * 70);
+					- (int) (Math.random() * 100);
+			int nouveauY = this.y + (int) (Math.random() * 30)
+					- (int) (Math.random() * 30);
 			int indexType = methode.parent.getParent().getTypes()
 					.indexOf(methode.parent); // index dy type contenant la
 												// méthode
@@ -254,9 +254,9 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 							+ this.typeDessin.get(indexType).getHeight()) {
 				// Les types ne doivent pas se superposer
 				nouveauX = this.x + (int) (Math.random() * 300)
-						- (int) (Math.random() * 200);
-				nouveauY = this.y + (int) (Math.random() * 100)
-						- (int) (Math.random() * 70);
+						- (int) (Math.random() * 100);
+				nouveauY = this.y + (int) (Math.random() * 30)
+						- (int) (Math.random() * 30);
 			}
 			this.x = nouveauX;
 			this.y = nouveauY;
