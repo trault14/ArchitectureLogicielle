@@ -1,10 +1,8 @@
 package visitor;
 
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -14,6 +12,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import base.*;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.svggen.SVGGraphics2DIOException;
@@ -22,11 +21,6 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
 import tools.TypeDessin;
-import base.Diagramme;
-import base.Fleche;
-import base.Methode;
-import base.Type;
-import base.Variable;
 
 public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor {
 
@@ -224,14 +218,21 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		// System.out.println("Visite de Methode");
 		// svgGenerator.draw(new Rectangle(x, y, largeur, hauteur));
 
+		// Recuperation des arguments
+		String args = "";
+		for (Argument argument: methode.arguments) {
+			args += argument.type + " " + argument.name + ", ";
+		}
+		if(args.length()!=0) args = args.substring(0, args.length()-2);
+
 		// On vérifie si la méthode est public ou private
 		if (methode.getStatut()) { // public
 			svgGenerator.drawString(" " + methode.visibility + " "
-					+ methode.nom + "(" + methode.arguments.toString() + ") : "
+					+ methode.nom + "(" + args + ") : "
 					+ methode.returnType, x, y + dtexte);
 		} else {
 			svgGenerator.drawString(" " + methode.visibility + " "
-					+ methode.nom + "(" + methode.arguments.toString() + ") : "
+					+ methode.nom + "(" + args + ") : "
 					+ methode.returnType, x, y + dtexte);
 		}
 

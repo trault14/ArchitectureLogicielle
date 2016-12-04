@@ -2,7 +2,6 @@ package main;
 import base.*;
 import builder.*;
 import visitor.DiagrammeElementDessinerVisitor;
-import visitor.DiagrammeElementScripterVisitor;
 
 public class Main {
 	public static void main(String[] args) {
@@ -21,9 +20,11 @@ public class Main {
 					.methode("-", "dry", "Boolean")
 				.type("class", "shirt")
 					.methode("+", "fold", "void")
-						//.argument("name", "type")
+						.argument("pattern", "Pattern")
+						.argument("iron", "Metal")
 					.variable("+", "sleeveLength", "Integer")
 					.methode("-", "wash", "Cloth")
+						.argument("temperature", "Integer")
 					.methode("+", "dry", "Boolean")
 					.methode("+", "ironed", "Boolean")
 				.type("interface", "cloth")
