@@ -10,7 +10,7 @@ public class Main {
 		DiagrammeBuilder diagrammeBuilder = new DiagrammeBuilder();
 		
 		diagrammeBuilder
-				.type("class", "pairOfSocks")
+				.type("class", "PairOfSocks")
 					.variable("+", "material", "Wool")
 					.variable("+", "thickness", "Integer")
 					.variable("-", "color", "Color")
@@ -18,7 +18,7 @@ public class Main {
 					.methode("+", "getTogether", "Socks")
 					.methode("+", "wash", "void")
 					.methode("-", "dry", "Boolean")
-				.type("class", "shirt")
+				.type("class", "Shirt")
 					.methode("+", "fold", "void")
 						.argument("pattern", "Pattern")
 						.argument("iron", "Metal")
@@ -27,12 +27,12 @@ public class Main {
 						.argument("temperature", "Integer")
 					.methode("+", "dry", "Boolean")
 					.methode("+", "ironed", "Boolean")
-				.type("interface", "cloth")
-					.methode("+", "wear", "Tenue")
-				.fleche("pairOfSocks", "shirt")
-				.fleche("pairOfSocks", "cloth")
-				.fleche("cloth", "shirt")
-				.fleche("cloth", "pairOfSocks")
+				.type("interface", "Cloth")
+					.methode("+", "wear", "Outfit")
+				.fleche("PairOfSocks", "Shirt")
+				.fleche("PairOfSocks", "Cloth")
+				.fleche("Cloth", "Shirt")
+				.fleche("Cloth", "PairOfSocks")
 		;
 
 		Diagramme diagramme = diagrammeBuilder.getContent(null);
