@@ -42,4 +42,9 @@ public class Fleche implements DiagrammeElement {
 	public void accept(DiagrammeElementVisitor visitor) {
 		visitor.visit(this);
 	}
+
+	@Override
+	public DiagrammeElement getParent() {
+		return this.parent;
+	}
 }

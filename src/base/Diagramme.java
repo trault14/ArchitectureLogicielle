@@ -46,7 +46,6 @@ public class Diagramme implements DiagrammeElement {
 		
 	@Override
 	public void accept(DiagrammeElementVisitor visitor) {
-		// TODO Auto-generated method stub
 		for (Type type : this.types) {
 			type.accept(visitor);
 		}
@@ -60,5 +59,10 @@ public class Diagramme implements DiagrammeElement {
 		}
 
 		visitor.visit(this);
+	}
+
+	@Override
+	public DiagrammeElement getParent() {
+		return this.parent;
 	}
 }

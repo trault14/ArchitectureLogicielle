@@ -61,7 +61,11 @@ public class Methode implements DiagrammeElement {
 
 	@Override
 	public void accept(DiagrammeElementVisitor visitor) {
-		// TODO Auto-generated method stub
 		visitor.visit(this);
+	}
+
+	@Override
+	public DiagrammeElement getParent() {
+		return this.parent;
 	}
 }
