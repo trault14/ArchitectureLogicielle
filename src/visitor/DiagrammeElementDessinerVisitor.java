@@ -67,14 +67,14 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Diagramme diagramme) {
-		//System.out.println("Visite du Diagramme");
+		// System.out.println("Visite du Diagramme");
 		this.printGraphic();
 
 	}
 
 	@Override
 	public void visit(Type type) {
-		//System.out.println("Visite du Type");
+		// System.out.println("Visite du Type");
 
 		typeDessin.add(new TypeDessin(type, x, y, hauteur, largeur));
 
@@ -95,16 +95,13 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		// Ecriture du nom du type
 		svgGenerator.drawString(" << " + type.type + " >> ", x, y + dtexte);
-		y = y + 3*dtexte/2;
+		y = y + 3 * dtexte / 2;
 		svgGenerator.drawString(" " + type.nom, x, y + dtexte);
 
 		// Ligne de séparation
 		svgGenerator.drawLine(x, y + hauteur, x + largeur, y + hauteur);
 
 		this.y += hauteur;
-
-		// prochain type placé de manière aléatoire sur le diagramme
-		// this.x = this.x + (int)(Math.random()*20) - (int)(Math.random()*20);
 
 		if (type.methodes.isEmpty() && type.variables.isEmpty()) {
 			this.y += hauteur; // on saute une ligne
@@ -114,7 +111,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	// /!\ Pour le moment, les types sont alignés verticalement
 	@Override
 	public void visit(Fleche fleche) {
-		//System.out.println("Visite de Fleche");
+		// System.out.println("Visite de Fleche");
 
 		// Recuperation des classes reliées par la fleche
 		Type base = fleche.getBase();
@@ -215,18 +212,18 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Methode methode) {
-		//System.out.println("Visite de Methode");
+		// System.out.println("Visite de Methode");
 		// svgGenerator.draw(new Rectangle(x, y, largeur, hauteur));
 
 		// On vérifie si la méthode est public ou private
 		if (methode.getStatut()) { // public
-			svgGenerator.drawString(" " + methode.visibility + " " + methode.nom + "("
-					+ methode.arguments.toString() + ") : " + methode.returnType,
-					x, y + dtexte);
+			svgGenerator.drawString(" " + methode.visibility + " "
+					+ methode.nom + "(" + methode.arguments.toString() + ") : "
+					+ methode.returnType, x, y + dtexte);
 		} else {
-			svgGenerator.drawString(" " + methode.visibility + " " + methode.nom + "("
-					+ methode.arguments.toString() + ") : " + methode.returnType,
-					x, y + dtexte);
+			svgGenerator.drawString(" " + methode.visibility + " "
+					+ methode.nom + "(" + methode.arguments.toString() + ") : "
+					+ methode.returnType, x, y + dtexte);
 		}
 
 		this.y += hauteur; // Passage à la ligne suivante
@@ -235,15 +232,34 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 			this.y += hauteur; // on saute une ligne si la méthode est la
 								// dernière
 			// prochain type placé de manière aléatoire sur le diagramme
-			this.x = this.x + (int) (Math.random() * 80)
-					- (int) (Math.random() * 20);
+			int nouveauX = this.x + (int) (Math.random() * 300)
+					- (int) (Math.random() * 200);
+			int nouveauY = this.y + (int) (Math.random() * 100)
+					- (int) (Math.random() * 70);
+			int indexType = methode.parent.getParent().getTypes()
+					.indexOf(methode.parent); // index dy type contenant la
+												// méthode
+			while (nouveauX < this.x
+					+ this.typeDessin.get(indexType).getWidth()
+					&& nouveauY < this.y
+							+ this.typeDessin.get(indexType).getHeight()) {
+				// Les types ne doivent pas se superposer
+				nouveauX = this.x + (int) (Math.random() * 300)
+						- (int) (Math.random() * 200);
+				nouveauY = this.y + (int) (Math.random() * 100)
+						- (int) (Math.random() * 70);
+			}
+			this.x = nouveauX;
+			this.y = nouveauY;
+
 		}
 	}
 
 	@Override
 	public void visit(Variable var) {
-		//System.out.println("Visite de Variable");
-		svgGenerator.drawString(" " + var.visibility + " " + var.nom + " : " + var.typeVariable, x, y + dtexte);
+		// System.out.println("Visite de Variable");
+		svgGenerator.drawString(" " + var.visibility + " " + var.nom + " : "
+				+ var.typeVariable, x, y + dtexte);
 		this.y += hauteur; // Passage à la ligne suivante
 		if (var.equals(var.parent.variables.get(var.parent.variables.size() - 1))) {
 			svgGenerator.drawLine(x, y, x + largeur, y);
