@@ -39,8 +39,8 @@ public class MethodeBuilder{
 	}
 
 	
-	public TypeBuilder type(String nom) {
-		return this.parent.type(nom);
+	public TypeBuilder type(String type, String nom) {
+		return this.parent.type(type, nom);
 	}
 
 	

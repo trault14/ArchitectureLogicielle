@@ -33,8 +33,9 @@ public class DiagrammeBuilder{
 		return child;
 	}
 	
-	public TypeBuilder type(String nom) {
+	public TypeBuilder type(String type, String nom) {
 		TypeBuilder child = new TypeBuilder(this);
+		child.setType(type);
 		child.setNom(nom);
 		this.types.add(child);
 		return child;

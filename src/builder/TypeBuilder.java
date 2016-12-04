@@ -11,6 +11,7 @@ public class TypeBuilder{
 	public List<MethodeBuilder> methodes = new ArrayList<MethodeBuilder>();
 	public List<VariableBuilder> variables = new ArrayList<VariableBuilder>();
 	public String nom;
+    public String type;
 	
 	public TypeBuilder(DiagrammeBuilder parent){
 		this.parent = parent;
@@ -20,8 +21,11 @@ public class TypeBuilder{
 		this.nom = nom;
 	}
 
-	
-	public DiagrammeBuilder diagramme() {
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public DiagrammeBuilder diagramme() {
 		return this.parent.diagramme();
 	}
 
@@ -31,8 +35,8 @@ public class TypeBuilder{
 	}
 
 	
-	public TypeBuilder type(String nom) {
-		return this.parent.type(nom);
+	public TypeBuilder type(String type, String nom) {
+		return this.parent.type(type, nom);
 	}
 
 	
@@ -65,6 +69,7 @@ public class TypeBuilder{
 		for(VariableBuilder vb : variables){
 			result.addVariable(vb.getContent(result));
 		}
+		result.setType(type);
 		result.setNom(nom);
 		return result;
 	}

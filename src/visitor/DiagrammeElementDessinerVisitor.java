@@ -86,14 +86,16 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		// Création du rectangle du type
 		svgGenerator.fill(new Rectangle(x, y, largeur, (nbVariables
-				+ nbMethodes + 1)
+				+ nbMethodes + 2)
 				* hauteur));
 		svgGenerator.setPaint(Color.black);
 		svgGenerator.draw(new Rectangle(x, y, largeur, (nbVariables
-				+ nbMethodes + 1)
+				+ nbMethodes + 2)
 				* hauteur));
 
 		// Ecriture du nom du type
+		svgGenerator.drawString(" << " + type.type + " >> ", x, y + dtexte);
+		y = y + 3*dtexte/2;
 		svgGenerator.drawString(" " + type.nom, x, y + dtexte);
 
 		// Ligne de séparation

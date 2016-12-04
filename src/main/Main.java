@@ -10,7 +10,7 @@ public class Main {
 		DiagrammeBuilder diagrammeBuilder = new DiagrammeBuilder();
 		
 		diagrammeBuilder
-				.type("pairOfSocks")
+				.type("class", "pairOfSocks")
 					.variable("+", "material", "Wool")
 					.variable("+", "thickness", "Integer")
 					.variable("-", "color", "Color")
@@ -18,13 +18,14 @@ public class Main {
 					.methode("+", "getTogether", "Socks")
 					.methode("+", "wash", "void")
 					.methode("-", "dry", "Boolean")
-				.type("shirt")
+				.type("class", "shirt")
 					.methode("+", "fold", "void")
+						//.argument("name", "type")
 					.variable("+", "sleeveLength", "Integer")
 					.methode("-", "wash", "Cloth")
 					.methode("+", "dry", "Boolean")
 					.methode("+", "ironed", "Boolean")
-				.type("cloth")
+				.type("interface", "cloth")
 					.methode("+", "wear", "Tenue")
 				.fleche("pairOfSocks", "shirt")
 				.fleche("pairOfSocks", "cloth")

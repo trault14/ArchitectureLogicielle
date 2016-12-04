@@ -7,6 +7,7 @@ import visitor.DiagrammeElement;
 import visitor.DiagrammeElementVisitor;
 
 public class Type implements DiagrammeElement {
+	public String type;
 	public String nom;
 	public List<Methode> methodes = new ArrayList<Methode>();
 	public List<Variable> variables = new ArrayList<Variable>();
@@ -18,6 +19,10 @@ public class Type implements DiagrammeElement {
 	
 	public void setParent(Diagramme parent){
 		this.parent = parent;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	public void setNom(String nom){
