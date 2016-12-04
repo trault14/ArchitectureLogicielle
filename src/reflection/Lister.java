@@ -47,7 +47,7 @@ public class Lister {
 			try {
 				c = Class.forName(className);
 				TypeBuilder type = diagramme.type("class", className);
-				Method[] methods = c.getMethods();
+				Method[] methods = c.getDeclaredMethods();
 				for(Method method : methods){
 					type.methode("+", method.getName(), method.getGenericReturnType().getTypeName()); //TODO details
 				}
@@ -62,19 +62,5 @@ public class Lister {
 			}
 		}
 		return diagramme;
-	}
-	
-	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		/*
-		Class c = Class.forName("builder.DiagrammeBuilder");
-		System.out.println(c.getMethods()[0].getName());
-		*/
-		System.out.println("Begin Lister Main");
-		Lister lister = new Lister();
-		List<String> classesNames = lister.list("");
-		for(String className : classesNames){
-			System.out.println(className);
-		}
-		System.out.println("End Lister Main");
 	}
 }

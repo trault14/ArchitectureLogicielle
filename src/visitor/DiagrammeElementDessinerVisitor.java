@@ -67,14 +67,14 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Diagramme diagramme) {
-		System.out.println("Visite du Diagramme");
+		//System.out.println("Visite du Diagramme");
 		this.printGraphic();
 
 	}
 
 	@Override
 	public void visit(Type type) {
-		System.out.println("Visite du Type");
+		//System.out.println("Visite du Type");
 
 		typeDessin.add(new TypeDessin(type, x, y, hauteur, largeur));
 
@@ -114,7 +114,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	// /!\ Pour le moment, les types sont alignés verticalement
 	@Override
 	public void visit(Fleche fleche) {
-		System.out.println("Visite de Fleche");
+		//System.out.println("Visite de Fleche");
 
 		// Recuperation des classes reliées par la fleche
 		Type base = fleche.getBase();
@@ -215,7 +215,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Methode methode) {
-		System.out.println("Visite de Methode");
+		//System.out.println("Visite de Methode");
 		// svgGenerator.draw(new Rectangle(x, y, largeur, hauteur));
 
 		// On vérifie si la méthode est public ou private
@@ -242,7 +242,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Variable var) {
-		System.out.println("Visite de Variable");
+		//System.out.println("Visite de Variable");
 		svgGenerator.drawString(" " + var.visibility + " " + var.nom + " : " + var.typeVariable, x, y + dtexte);
 		this.y += hauteur; // Passage à la ligne suivante
 		if (var.equals(var.parent.variables.get(var.parent.variables.size() - 1))) {
