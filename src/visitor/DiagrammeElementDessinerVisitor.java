@@ -94,9 +94,18 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 				* hauteur));
 
 		// Ecriture du nom du type
-		svgGenerator.drawString(" << " + type.type + " >> ", x, y + dtexte);
+		String s = " << " + type.type + " >> ";
+
+		int xCentre = (largeur - (s.length()) * 5) / 2; // position de la
+														// première
+		// lettre, de manière à
+		// centrer le texte
+		svgGenerator.drawString(s, x + xCentre, y + dtexte);
 		y = y + 3 * dtexte / 2;
-		svgGenerator.drawString(" " + type.nom, x, y + dtexte);
+
+		s = " " + type.nom;
+		xCentre = (largeur - (s.length()) * 6) / 2;
+		svgGenerator.drawString(s, x + xCentre, y + dtexte);
 
 		// Ligne de séparation
 		svgGenerator.drawLine(x, y + hauteur, x + largeur, y + hauteur);
