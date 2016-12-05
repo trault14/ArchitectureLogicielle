@@ -21,6 +21,7 @@ import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
+import tools.CodeCouleur;
 import tools.TypeDessin;
 import base.Diagramme;
 import base.Fleche;
@@ -46,7 +47,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		String svgNS = "http://www.w3.org/2000/svg";
 		Document document = domImpl.createDocument(svgNS, "svg", null);
 		SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-		svgGenerator.setBackground(Color.white);
+		svgGenerator.setBackground(CodeCouleur.JAUNE_CLAIR);
 		svgGenerator.setPaint(Color.black);
 		return svgGenerator;
 	}
@@ -82,7 +83,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int nbMethodes = type.methodes.size();
 
 		// Couleur du fond du type
-		svgGenerator.setPaint(Color.white);
+		svgGenerator.setPaint(CodeCouleur.BLANC_CREME);
 
 		// Création du rectangle du type
 		svgGenerator.fill(new Rectangle(x, y, largeur, (nbVariables
