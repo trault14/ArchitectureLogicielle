@@ -9,7 +9,7 @@ import visitor.DiagrammeElementVisitor;
 public class Methode implements DiagrammeElement {
 
 	// Arguments de la méthode
-	public List<String> arguments = new ArrayList<String>();
+	public List<Argument> arguments = new ArrayList<>();
 
 	// Visibilité public ou private de la methode
 	public String visibility;
@@ -55,7 +55,7 @@ public class Methode implements DiagrammeElement {
         this.returnType = returnType;
     }
 
-    public void addArgument(String argument) {
+    public void addArgument(Argument argument) {
 		this.arguments.add(argument);
 	}
 

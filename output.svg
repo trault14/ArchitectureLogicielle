@@ -22,58 +22,60 @@
       > + size : Integer</text
       ><line x1="30" x2="180" y1="100" style="fill:none; stroke:black;" y2="100"
       /><text x="30" xml:space="preserve" y="110" style="fill:black; stroke:none;"
-      > + getTogether([]) : Socks</text
+      > + getTogether() : Socks</text
       ><text x="30" xml:space="preserve" y="125" style="fill:black; stroke:none;"
-      > + wash([]) : void</text
+      > + wash() : void</text
       ><text x="30" xml:space="preserve" y="140" style="fill:black; stroke:none;"
-      > - dry([]) : Boolean</text
-      ><rect x="177" width="150" height="105" y="179" style="stroke:none;"
-      /><rect x="177" y="179" width="150" style="fill:none; stroke:black;" height="105"
-      /><text x="219" xml:space="preserve" y="189" style="fill:black; stroke:none;"
+      > - dry() : Boolean</text
+      ><rect x="144" width="150" height="105" y="179" style="stroke:none;"
+      /><rect x="144" y="179" width="150" style="fill:none; stroke:black;" height="105"
+      /><text x="186" xml:space="preserve" y="189" style="fill:black; stroke:none;"
       > &lt;&lt; class &gt;&gt; </text
-      ><text x="234" xml:space="preserve" y="204" style="fill:black; stroke:none;"
+      ><text x="201" xml:space="preserve" y="204" style="fill:black; stroke:none;"
       > Shirt</text
-      ><line x1="177" x2="327" y1="209" style="fill:none; stroke:black;" y2="209"
-      /><text x="177" xml:space="preserve" y="219" style="fill:black; stroke:none;"
+      ><line x1="144" x2="294" y1="209" style="fill:none; stroke:black;" y2="209"
+      /><text x="144" xml:space="preserve" y="219" style="fill:black; stroke:none;"
       > + sleeveLength : Integer</text
-      ><line x1="177" x2="327" y1="224" style="fill:none; stroke:black;" y2="224"
-      /><text x="177" xml:space="preserve" y="234" style="fill:black; stroke:none;"
-      > + fold([]) : void</text
-      ><text x="177" xml:space="preserve" y="249" style="fill:black; stroke:none;"
-      > - wash([]) : Cloth</text
-      ><text x="177" xml:space="preserve" y="264" style="fill:black; stroke:none;"
-      > + dry([]) : Boolean</text
-      ><text x="177" xml:space="preserve" y="279" style="fill:black; stroke:none;"
-      > + ironed([]) : Boolean</text
-      ><rect x="177" y="316" width="150" style="fill:rgb(187,210,225); stroke:none;" height="45"
-      /><rect x="177" y="316" width="150" style="fill:none; stroke:black;" height="45"
-      /><text x="209" xml:space="preserve" y="326" style="fill:black; stroke:none;"
+      ><line x1="144" x2="294" y1="224" style="fill:none; stroke:black;" y2="224"
+      /><text x="144" xml:space="preserve" y="234" style="fill:black; stroke:none;"
+      > + fold(Pattern pattern, Metal iron) : void</text
+      ><text x="144" xml:space="preserve" y="249" style="fill:black; stroke:none;"
+      > - wash(Integer temperature) : Cloth</text
+      ><text x="144" xml:space="preserve" y="264" style="fill:black; stroke:none;"
+      > + dry() : Boolean</text
+      ><text x="144" xml:space="preserve" y="279" style="fill:black; stroke:none;"
+      > + ironed() : Boolean</text
+      ><rect x="311" y="305" width="150" style="fill:rgb(187,210,225); stroke:none;" height="60"
+      /><rect x="311" y="305" width="150" style="fill:none; stroke:black;" height="60"
+      /><text x="343" xml:space="preserve" y="315" style="fill:black; stroke:none;"
       > &lt;&lt; interface &gt;&gt; </text
-      ><text x="234" xml:space="preserve" y="341" style="fill:black; stroke:none;"
+      ><text x="368" xml:space="preserve" y="330" style="fill:black; stroke:none;"
       > Cloth</text
-      ><line x1="177" x2="327" y1="346" style="fill:none; stroke:black;" y2="346"
-      /><text x="177" xml:space="preserve" y="356" style="fill:black; stroke:none;"
-      > + wear([]) : Tenue</text
-      ><line x1="334" x2="334" y1="32" style="fill:none; stroke:black;" y2="201"
-      /><line x1="180" x2="334" y1="32" style="fill:none; stroke:black;" y2="32"
-      /><line x1="327" x2="334" y1="201" style="fill:none; stroke:black;" y2="201"
-      /><polygon style="fill:none; stroke:black;" points=" 327 201 329 203 329 199"
-      /><polygon style="fill:black; stroke:none;" points=" 327 201 329 203 329 199"
-      /><line x1="339" x2="339" y1="37" style="fill:none; stroke:black;" y2="343"
-      /><line x1="180" x2="339" y1="37" style="fill:none; stroke:black;" y2="37"
-      /><line x1="327" x2="339" y1="343" style="fill:none; stroke:black;" y2="343"
-      /><polygon style="fill:none; stroke:black;" points=" 327 343 329 345 329 341"
-      /><polygon style="fill:black; stroke:none;" points=" 327 343 329 345 329 341"
-      /><line x1="168" x2="168" y1="340" style="fill:none; stroke:black;" y2="203"
-      /><line x1="168" x2="177" y1="340" style="fill:none; stroke:black;" y2="340"
-      /><line x1="168" x2="177" y1="203" style="fill:none; stroke:black;" y2="203"
-      /><polygon style="fill:none; stroke:black;" points=" 177 203 175 205 175 201"
-      /><polygon style="fill:black; stroke:none;" points=" 177 203 175 205 175 201"
-      /><line x1="22" x2="22" y1="339" style="fill:none; stroke:black;" y2="33"
-      /><line x1="22" x2="30" y1="33" style="fill:none; stroke:black;" y2="33"
-      /><line x1="22" x2="177" y1="339" style="fill:none; stroke:black;" y2="339"
-      /><polygon style="fill:none; stroke:black;" points=" 30 33 28 35 28 31"
-      /><polygon style="fill:black; stroke:none;" points=" 30 33 28 35 28 31"
+      ><line x1="311" x2="461" y1="335" style="fill:none; stroke:black;" y2="335"
+      /><text x="311" xml:space="preserve" y="345" style="fill:black; stroke:none;"
+      > + wear() : Tenue</text
+      ><text x="311" xml:space="preserve" y="360" style="fill:black; stroke:none;"
+      > + wear() : Outfit</text
+      ><line x1="298" x2="298" y1="29" style="fill:none; stroke:black;" y2="198"
+      /><line x1="180" x2="298" y1="29" style="fill:none; stroke:black;" y2="29"
+      /><line x1="294" x2="298" y1="198" style="fill:none; stroke:black;" y2="198"
+      /><polygon style="fill:none; stroke:black;" points=" 294 198 296 200 296 196"
+      /><polygon style="fill:black; stroke:none;" points=" 294 198 296 200 296 196"
+      /><line x1="464" x2="464" y1="28" style="fill:none; stroke:black;" y2="323"
+      /><line x1="180" x2="464" y1="28" style="fill:none; stroke:black;" y2="28"
+      /><line x1="461" x2="464" y1="323" style="fill:none; stroke:black;" y2="323"
+      /><polygon style="fill:none; stroke:black;" points=" 461 323 463 325 463 321"
+      /><polygon style="fill:black; stroke:none;" points=" 461 323 463 325 463 321"
+      /><line x1="133" x2="133" y1="331" style="fill:none; stroke:black;" y2="205"
+      /><line x1="133" x2="144" y1="205" style="fill:none; stroke:black;" y2="205"
+      /><line x1="133" x2="311" y1="331" style="fill:none; stroke:black;" y2="331"
+      /><polygon style="fill:none; stroke:black;" points=" 144 205 142 207 142 203"
+      /><polygon style="fill:black; stroke:none;" points=" 144 205 142 207 142 203"
+      /><line x1="27" x2="27" y1="323" style="fill:none; stroke:black;" y2="28"
+      /><line x1="27" x2="30" y1="28" style="fill:none; stroke:black;" y2="28"
+      /><line x1="27" x2="311" y1="323" style="fill:none; stroke:black;" y2="323"
+      /><polygon style="fill:none; stroke:black;" points=" 30 28 28 30 28 26"
+      /><polygon style="fill:black; stroke:none;" points=" 30 28 28 30 28 26"
     /></g
   ></g
 ></svg

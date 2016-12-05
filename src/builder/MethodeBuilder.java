@@ -8,7 +8,7 @@ import base.Type;
 
 public class MethodeBuilder{
 	public TypeBuilder parent;
-	public List<String> arguments = new ArrayList<String>();
+	public List<ArgumentBuilder> arguments = new ArrayList<>();
 	String visibility;
 	String nom;
 	String returnType;
@@ -53,13 +53,24 @@ public class MethodeBuilder{
 		return this.parent.variable(visibility, nom, type);
 	}
 
-	
+
+	public ArgumentBuilder argument(String name, String type) {
+		ArgumentBuilder child = new ArgumentBuilder(this);
+		child.setName(name);
+		child.setType(type);
+		this.arguments.add(child);
+		return child;
+	}
+
 	public Methode getContent(Type parent) {
 		Methode result = new Methode();
 		result.setParent(parent);
         result.setVisibility(visibility);
 		result.setNom(nom);
         result.setReturnType(returnType);
+		for(ArgumentBuilder ab : arguments){
+			result.addArgument(ab.getContent(result));
+		}
 		return result;
 	}
 }
