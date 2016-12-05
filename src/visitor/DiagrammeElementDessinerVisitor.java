@@ -83,7 +83,11 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int nbMethodes = type.methodes.size();
 
 		// Couleur du fond du type
-		svgGenerator.setPaint(CodeCouleur.BLANC_CREME);
+		if (type.type == "interface") {
+			svgGenerator.setPaint(CodeCouleur.BLEU_FUMEE);
+		}else{
+			svgGenerator.setPaint(CodeCouleur.JAUNE_CLAIR);
+		}
 
 		// Création du rectangle du type
 		svgGenerator.fill(new Rectangle(x, y, largeur, (nbVariables
