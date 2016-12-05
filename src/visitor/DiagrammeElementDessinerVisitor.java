@@ -1,6 +1,9 @@
 package visitor;
 
+import java.awt.BasicStroke;
+import java.awt.Font;
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.io.FileNotFoundException;
@@ -13,10 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.*;
+
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.svggen.SVGGraphics2DIOException;
-//import org.apache.batik.svggen.font.Font;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
@@ -27,8 +30,8 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	int x = 30;
 	int y = 10;
-	int hauteur = 15;
-	int largeur = 150;
+	int hauteur = 22;
+	int largeur = 280;
 	int dtexte = 2 * hauteur / 3; // decalage du texte en y
 
 	SVGGraphics2D svgGenerator = this.getGenerator();
@@ -62,14 +65,14 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Diagramme diagramme) {
-		// System.out.println("Visite du Diagramme");
+		System.out.println("Visite du Diagramme");
 		this.printGraphic();
 
 	}
 
 	@Override
 	public void visit(Type type) {
-		// System.out.println("Visite du Type");
+		System.out.println("Visite du Type");
 
 		typeDessin.add(new TypeDessin(type, x, y, hauteur, largeur));
 
@@ -78,10 +81,13 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		// Couleur du fond du type
 		if (type.type == "interface") {
-			svgGenerator.setPaint(CodeCouleur.BLEU_FUMEE);
-		}else{
-			svgGenerator.setPaint(CodeCouleur.JAUNE_CLAIR);
+			svgGenerator.setPaint(CodeCouleur.BLANC_CREME);
+		} else {
+			svgGenerator.setPaint(CodeCouleur.BLANC_CASSE);
 		}
+
+		// Epaisseur du trait
+		svgGenerator.setStroke(new BasicStroke(2));
 
 		// Création du rectangle du type
 		svgGenerator.fill(new Rectangle(x, y, largeur, (nbVariables
@@ -94,17 +100,21 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		// Ecriture du nom du type
 		String s = " << " + type.type + " >> ";
-
-		int xCentre = (largeur - (s.length()) * 5) / 2; // position de la
+		FontMetrics metrics = svgGenerator.getFontMetrics();
+		int xCentre = (largeur - metrics.stringWidth(s)) / 2; // position de la
 														// première
 		// lettre, de manière à
 		// centrer le texte
+		Font f = svgGenerator.getFont();
 		svgGenerator.drawString(s, x + xCentre, y + dtexte);
 		y = y + 3 * dtexte / 2;
 
 		s = " " + type.nom;
-		xCentre = (largeur - (s.length()) * 6) / 2;
+		xCentre = (largeur - metrics.stringWidth(s)) / 2;
+		svgGenerator.setFont(new Font("default", Font.BOLD, 16));
 		svgGenerator.drawString(s, x + xCentre, y + dtexte);
+		
+		svgGenerator.setFont(f);
 
 		// Ligne de séparation
 		svgGenerator.drawLine(x, y + hauteur, x + largeur, y + hauteur);
@@ -119,7 +129,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 	// /!\ Pour le moment, les types sont alignés verticalement
 	@Override
 	public void visit(Fleche fleche) {
-		// System.out.println("Visite de Fleche");
+		System.out.println("Visite de Fleche");
 
 		// Recuperation des classes reliées par la fleche
 		Type base = fleche.getBase();
@@ -131,7 +141,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int indexPointe = pointe.parent.getTypes().indexOf(pointe);
 
 		// Décalage de la ligne par rapport au Type
-		int e = (int) (Math.random() * 10) + 3;
+		int e = (int) (Math.random() * 15) + 5;
 		// System.out.println(e);
 
 		// Recupération des coordonnées du type de départ
@@ -152,8 +162,8 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		int[] yTriangle = new int[3];
 
 		yTriangle[0] = yPointe + e;
-		yTriangle[1] = yPointe + 2 + e;
-		yTriangle[2] = yPointe - 2 + e;
+		yTriangle[1] = yPointe + 4 + e;
+		yTriangle[2] = yPointe - 4 + e;
 		// Fleche à gauche
 		int difference = xPointe - xBase;
 		if (difference < this.typeDessin.get(indexBase).getWidth() / 2) {
@@ -183,8 +193,8 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 			// Triangle de la fleche
 			xTriangle[0] = xPointe;
-			xTriangle[1] = xPointe - 2;
-			xTriangle[2] = xPointe - 2;
+			xTriangle[1] = xPointe - 3;
+			xTriangle[2] = xPointe - 3;
 
 		} else {
 			// Fleche à droite
@@ -209,9 +219,9 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 			xTriangle[0] = xPointe
 					+ this.typeDessin.get(indexPointe).getWidth();
 			xTriangle[1] = xPointe
-					+ this.typeDessin.get(indexPointe).getWidth() + 2;
+					+ this.typeDessin.get(indexPointe).getWidth() + 3;
 			xTriangle[2] = xPointe
-					+ this.typeDessin.get(indexPointe).getWidth() + 2;
+					+ this.typeDessin.get(indexPointe).getWidth() + 3;
 		}
 
 		svgGenerator.drawPolygon(new Polygon(xTriangle, yTriangle, 3));
@@ -220,25 +230,26 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Methode methode) {
-		// System.out.println("Visite de Methode");
+		System.out.println("Visite de Methode");
 		// svgGenerator.draw(new Rectangle(x, y, largeur, hauteur));
 
 		// Recuperation des arguments
 		String args = "";
-		for (Argument argument: methode.arguments) {
+		for (Argument argument : methode.arguments) {
 			args += argument.type + " " + argument.name + ", ";
 		}
-		if(args.length()!=0) args = args.substring(0, args.length()-2);
+		if (args.length() != 0)
+			args = args.substring(0, args.length() - 2);
 
 		// On vérifie si la méthode est public ou private
 		if (methode.getStatut()) { // public
 			svgGenerator.drawString(" " + methode.visibility + " "
-					+ methode.nom + "(" + args + ") : "
-					+ methode.returnType, x, y + dtexte);
+					+ methode.nom + "(" + args + ") : " + methode.returnType,
+					x, y + dtexte);
 		} else {
 			svgGenerator.drawString(" " + methode.visibility + " "
-					+ methode.nom + "(" + args + ") : "
-					+ methode.returnType, x, y + dtexte);
+					+ methode.nom + "(" + args + ") : " + methode.returnType,
+					x, y + dtexte);
 		}
 
 		this.y += hauteur; // Passage à la ligne suivante
@@ -272,7 +283,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Variable var) {
-		// System.out.println("Visite de Variable");
+		System.out.println("Visite de Variable");
 		svgGenerator.drawString(" " + var.visibility + " " + var.nom + " : "
 				+ var.typeVariable, x, y + dtexte);
 		this.y += hauteur; // Passage à la ligne suivante
