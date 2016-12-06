@@ -32,8 +32,7 @@ public class Main {
 					.methode("+", "wear", "Outfit")
 				.fleche("PairOfSocks", "Shirt")
 				.fleche("PairOfSocks", "Cloth")
-				.fleche("Cloth", "Shirt")
-				.fleche("Cloth", "PairOfSocks")
+				.fleche("Shirt","Cloth")
 		;
 
 		Diagramme diagramme = diagrammeBuilder.getContent(null);

@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -76,6 +77,9 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		typeDessin.add(new TypeDessin(type, x, y, hauteur, largeur));
 
+		// Pour récuperer la longueur d'une String en pixels
+		FontMetrics metrics = svgGenerator.getFontMetrics();
+
 		int nbVariables = type.variables.size();
 		int nbMethodes = type.methodes.size();
 
@@ -90,19 +94,21 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		svgGenerator.setStroke(new BasicStroke(2));
 
 		// Création du rectangle du type
-		svgGenerator.fill(new Rectangle(x, y, largeur, (nbVariables
+		svgGenerator.fill(new Rectangle(x, y, this.typeDessin.get(
+				this.typeDessin.size() - 1).getWidth(), (nbVariables
 				+ nbMethodes + 2)
 				* hauteur));
 		svgGenerator.setPaint(Color.black);
-		svgGenerator.draw(new Rectangle(x, y, largeur, (nbVariables
+		svgGenerator.draw(new Rectangle(x, y, this.typeDessin.get(
+				this.typeDessin.size() - 1).getWidth(), (nbVariables
 				+ nbMethodes + 2)
 				* hauteur));
 
 		// Ecriture du nom du type
 		String s = " << " + type.type + " >> ";
-		FontMetrics metrics = svgGenerator.getFontMetrics();
+
 		int xCentre = (largeur - metrics.stringWidth(s)) / 2; // position de la
-														// première
+		// première
 		// lettre, de manière à
 		// centrer le texte
 		Font f = svgGenerator.getFont();
@@ -113,7 +119,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		xCentre = (largeur - metrics.stringWidth(s)) / 2;
 		svgGenerator.setFont(new Font("default", Font.BOLD, 16));
 		svgGenerator.drawString(s, x + xCentre, y + dtexte);
-		
+
 		svgGenerator.setFont(f);
 
 		// Ligne de séparation
@@ -165,6 +171,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 		yTriangle[1] = yPointe + 4 + e;
 		yTriangle[2] = yPointe - 4 + e;
 		// Fleche à gauche
+		Stroke s = svgGenerator.getStroke();
 		int difference = xPointe - xBase;
 		if (difference < this.typeDessin.get(indexBase).getWidth() / 2) {
 			int x0;
@@ -184,6 +191,17 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 				y0 = yBase;
 				y1 = yPointe;
 			}
+
+			if (this.typeDessin.get(indexPointe).getType().type == "interface"
+					&& this.typeDessin.get(indexBase).getType().type == "class") {
+				float[] dashA = new float[30];
+				for (int y = 0; y < dashA.length; y++) {
+					dashA[y] = 10;
+				}
+				float dashP = 0;
+				svgGenerator
+						.setStroke(new BasicStroke(2, 1, 1, 1, dashA, dashP));
+			}
 			svgGenerator.drawLine(x0 - e, yBase + e, x0 - e, yPointe + e);
 
 			// lignes secondaires reliant la ligne principale avec les classes
@@ -198,6 +216,16 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		} else {
 			// Fleche à droite
+			if (this.typeDessin.get(indexPointe).getType().type == "interface"
+					&& this.typeDessin.get(indexBase).getType().type == "class") {
+				float[] dashA = new float[50];
+				for (int y = 0; y < dashA.length; y++) {
+					dashA[y] = 10;
+				}
+				float dashP = 0;
+				svgGenerator
+						.setStroke(new BasicStroke(2, 1, 1, 1, dashA, dashP));
+			}
 			svgGenerator.drawLine(xPointe
 					+ this.typeDessin.get(indexPointe).getWidth() + e, yBase
 					+ e, xPointe + this.typeDessin.get(indexPointe).getWidth()
@@ -226,6 +254,7 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 
 		svgGenerator.drawPolygon(new Polygon(xTriangle, yTriangle, 3));
 		svgGenerator.fillPolygon(new Polygon(xTriangle, yTriangle, 3));
+		svgGenerator.setStroke(s);
 	}
 
 	@Override
@@ -265,19 +294,36 @@ public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor 
 			int indexType = methode.parent.getParent().getTypes()
 					.indexOf(methode.parent); // index dy type contenant la
 												// méthode
+
 			while (nouveauX < this.x
 					+ this.typeDessin.get(indexType).getWidth()
 					&& nouveauY < this.y
-							+ this.typeDessin.get(indexType).getHeight()) {
+							+ this.typeDessin.get(indexType).getHeight()
+					&& nouveauX > 300 && nouveauX < 30 && nouveauY > 300) {
 				// Les types ne doivent pas se superposer
 				nouveauX = this.x + (int) (Math.random() * 300)
-						- (int) (Math.random() * 100);
+						- (int) (Math.random() * 60);
 				nouveauY = this.y + (int) (Math.random() * 30)
 						- (int) (Math.random() * 30);
+
+				// ALIGNEMENT HORIZONTAL
+
+				/*
+				 * System.out.println(indexType);
+				 * 
+				 * System.out.println((indexType+1) % 4 == 0); if ((indexType+1)
+				 * % 4 != 0) { // Les types ne doivent pas se superposer
+				 * nouveauX = this.x + this.typeDessin.get(indexType).getWidth()
+				 * + (int) (Math.random() * 70); this.x = nouveauX; this.y =
+				 * this.typeDessin.get(0).getY(); // } } else { while (nouveauY
+				 * < this.y + this.typeDessin.get(indexType).getHeight()) {
+				 * nouveauY = this.y + (int) (Math.random() * 30) - (int)
+				 * (Math.random() * 30); } this.x =
+				 * this.typeDessin.get(0).getX(); this.y = nouveauY;
+				 */
 			}
 			this.x = nouveauX;
 			this.y = nouveauY;
-
 		}
 	}
 
