@@ -2,6 +2,7 @@ package main;
 import base.*;
 import builder.*;
 import visitor.DiagrammeElementDessinerVisitor;
+import visitor.DiagrammeElementScripterVisitor;
 
 public class Main {
 	public static void main(String[] args) {
@@ -38,9 +39,10 @@ public class Main {
 		Diagramme diagramme = diagrammeBuilder.getContent(null);
 
 		DiagrammeElementDessinerVisitor visitor = new DiagrammeElementDessinerVisitor();
-		//DiagrammeElementScripterVisitor visitor = new DiagrammeElementScripterVisitor();
+		DiagrammeElementScripterVisitor visitor2 = new DiagrammeElementScripterVisitor();
 		
 		diagramme.accept(visitor);
+		diagramme.accept(visitor2);
 
 		System.out.println("Fini");
 	}

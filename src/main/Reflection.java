@@ -7,6 +7,7 @@ import base.Diagramme;
 import builder.DiagrammeBuilder;
 import reflection.Lister;
 import visitor.DiagrammeElementDessinerVisitor;
+import visitor.DiagrammeElementScripterVisitor;
 
 public class Reflection {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -20,9 +21,10 @@ public class Reflection {
 		Diagramme diagramme = diagrammeBuilder.getContent(null);
 		
 		DiagrammeElementDessinerVisitor visitor = new DiagrammeElementDessinerVisitor();
-		//DiagrammeElementScripterVisitor visitor = new DiagrammeElementScripterVisitor();
+		DiagrammeElementScripterVisitor visitor2 = new DiagrammeElementScripterVisitor();
 		
 		diagramme.accept(visitor);
+		diagramme.accept(visitor2);
 		
 		
 		System.out.println("Fini");
