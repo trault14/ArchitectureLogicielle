@@ -29,7 +29,7 @@ import tools.TypeDessin;
 
 public class DiagrammeElementDessinerVisitor implements DiagrammeElementVisitor {
 
-	int x = 30;
+	int x = 50;
 	int y = 10;
 	int hauteur = 22;
 	int largeur = 280;
