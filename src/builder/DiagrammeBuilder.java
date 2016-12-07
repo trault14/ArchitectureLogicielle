@@ -5,6 +5,11 @@ import java.util.List;
 
 import base.Diagramme;
 
+/***
+ * 
+ * Un builder retourne un élément de base
+ *
+ */
 public class DiagrammeBuilder{
 	public DiagrammeBuilder parent; //Le diagramme de base n'aura pas de parent
 	public List<TypeBuilder> types = new ArrayList<TypeBuilder>();
@@ -41,6 +46,10 @@ public class DiagrammeBuilder{
 		return child;
 	}
 	
+	/***
+	 * 
+	 * retourne l'élement de base correspondant au diagramme. Avec un parcours en profondeur, on parcours également les fils du diagramme.
+	 */
 	public Diagramme getContent(Diagramme parent) {
 		Diagramme result = new Diagramme();
 		result.setParent(parent);

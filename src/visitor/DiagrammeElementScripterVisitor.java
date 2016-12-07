@@ -10,8 +10,7 @@ public class DiagrammeElementScripterVisitor implements DiagrammeElementVisitor 
 
 	public int nbParents(DiagrammeElement element) {
 		int nb = 0;
-		while (element.getParent() != null) { // TODO si on change l'element
-												// null, remplacer ici aussi
+		while (element.getParent() != null) {
 			nb++;
 			element = element.getParent();
 		}
@@ -20,11 +19,6 @@ public class DiagrammeElementScripterVisitor implements DiagrammeElementVisitor 
 
 	@Override
 	public void visit(Diagramme diagramme) {
-		/*
-		 * TODO dans le accept d'un diagramme, le diagramme se visite en
-		 * dernier. Du coup il est tout en bas, il faudrait remedier à ça sans
-		 * toucher à la classe Diagramme (i.e. tout faire ici).
-		 */
 		String str = "";
 		for (int i = 0; i < this.nbParents(diagramme); i++) {
 			str += " ";
